@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: n8n
+    env: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: DB_POSTGRESDB_CONNECTION_URL
+        value: postgresql://neondb_owner:npg_mISB5n1beJPC@ep-gentle-tooth-a15814mp-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require

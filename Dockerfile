@@ -1,7 +1,7 @@
 # Use official n8n image
 FROM n8nio/n8n:latest
 
-# Copy env vars from Render into container
+# Set all environment variables
 ENV DB_TYPE=postgresdb
 ENV DB_POSTGRESDB_CONNECTION_URL=$postgresql://neondb_owner:npg_mISB5n1beJPC@ep-gentle-tooth-a15814mp-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ENV GENERIC_TIMEZONE=Asia/Kolkata
@@ -18,5 +18,5 @@ ENV NODE_OPTIONS="--dns-result-order=ipv4first"
 # Expose port
 EXPOSE 5678
 
-# Start n8n
-CMD ["n8n", "start"]
+# Start n8n correctly
+CMD ["node", "/usr/local/lib/node_modules/n8n/bin/n8n"]

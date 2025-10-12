@@ -3,7 +3,7 @@ FROM n8nio/n8n:latest
 
 # Copy env vars from Render into container
 ENV DB_TYPE=postgresdb
-ENV DB_POSTGRESDB_CONNECTION_URL=${DB_POSTGRESDB_CONNECTION_URL}
+ENV DB_POSTGRESDB_CONNECTION_URL=$postgresql://neondb_owner:npg_mISB5n1beJPC@ep-gentle-tooth-a15814mp-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ENV GENERIC_TIMEZONE=Asia/Kolkata
 ENV N8N_BASIC_AUTH_ACTIVE=true
 ENV N8N_BASIC_AUTH_USER=admin

@@ -1,9 +1,20 @@
-# Use official n8n image
-FROM n8nio/n8n:latest
+# Use official Node.js LTS image
+FROM node:20-bullseye
 
-# Set all environment variables
+# Install n8n globally
+RUN npm install -g n8n
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Set environment variables
 ENV DB_TYPE=postgresdb
-ENV DB_POSTGRESDB_CONNECTION_URL=$postgresql://neondb_owner:npg_mISB5n1beJPC@ep-gentle-tooth-a15814mp-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+ENV DB_POSTGRESDB_DATABASE=neondb
+ENV DB_POSTGRESDB_HOST=ep-gentle-tooth-a15814mp-pooler.ap-southeast-1.aws.neon.tech
+ENV DB_POSTGRESDB_USER=neondb_owner
+ENV DB_POSTGRESDB_PASSWORD=npg_mISB5n1beJPC
+ENV DB_POSTGRESDB_PORT=5432
+ENV DB_POSTGRESDB_SSL=true
 ENV GENERIC_TIMEZONE=Asia/Kolkata
 ENV N8N_BASIC_AUTH_ACTIVE=true
 ENV N8N_BASIC_AUTH_USER=admin
@@ -13,10 +24,9 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 ENV N8N_HOST=n8n-76pi.onrender.com
 ENV N8N_PROTOCOL=https
 ENV WEBHOOK_URL=https://n8n-76pi.onrender.com
-ENV NODE_OPTIONS="--dns-result-order=ipv4first"
 
-# Expose port
+# Expose port 5678
 EXPOSE 5678
 
-# Start n8n correctly
-CMD ["node", "/usr/local/lib/node_modules/n8n/bin/n8n"]
+# Start n8n
+CMD ["n8n", "start"]
